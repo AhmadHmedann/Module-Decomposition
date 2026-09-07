@@ -37,11 +37,13 @@ function handleReceivedMessage(receivedObject) {
       formFeedbackMessage.className = "";
     }, 1000);
   }
-  if(receivedObject.type ==="updatedMessage"){
-    const updatedMessage = messages.find((message)=>message.id === receivedObject.data.messageId)
+  if (receivedObject.type === "updatedMessage") {
+    const updatedMessage = messages.find(
+      (message) => message.id === receivedObject.data.messageId,
+    );
     updatedMessage.likesCount = receivedObject.data.likesCount;
     updatedMessage.dislikesCount = receivedObject.data.dislikesCount;
-    renderMessages(messages,rootEle);
+    renderMessages(messages, rootEle);
   }
 }
 
@@ -76,8 +78,7 @@ function handleSubmitMessage(event) {
     message: message,
   };
 
-  websocket.send(JSON.stringify({type:"newMessage",
-    data:newMessage}));
+  websocket.send(JSON.stringify({ type: "newMessage", data: newMessage }));
 }
 function handleReaction(event) {
   const reactionBtn = event.target.closest(".reaction-btn");
@@ -94,4 +95,4 @@ function handleReaction(event) {
 }
 
 formElm.addEventListener("submit", handleSubmitMessage);
-rootEle.addEventListener("click",handleReaction)
+rootEle.addEventListener("click", handleReaction);
